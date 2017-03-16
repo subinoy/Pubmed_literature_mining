@@ -9,26 +9,6 @@ output: word_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
 
 
 ```{r, echo=FALSE}
@@ -36,16 +16,16 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 library(RISmed)
 library(rmarkdown)
 search_topic <- 'selective serotonin reuptake inhibitors and autism'
-search_query <- EUtilsSummary(search_topic, retmax=10000)
+search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
 ```
 
-# see the ids of our returned query
-```{r}
-summary(search_query)
-QueryId(search_query)
-```
-
+# Search term used : "selective serotonin reuptake inhibitors and autism"
 ```{r, echo=FALSE}
+summary(search_query)
+#QueryId(search_query)
+```
+
+```{r, echo=FALSE, warning=FALSE}
 tally <- array()
 x <- 1
 for (i in 2000:2017){
@@ -57,11 +37,131 @@ for (i in 2000:2017){
 }
 
 names(tally) <- 2000:2017
-max(tally)
-# [1] 573
 ```
 
-```{r}
+Maximum hits in a single year
+```{r,echo=FALSE, fig.width=7, warning=FALSE}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,50), fig.width=7,
+        main="selective serotonin reuptake inhibitors & autism")
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('selective serotonin reuptake inhibitors and autism and brain', type='esearch',
+                       db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+
+Maximum hits in a single year
+```{r,echo=FALSE,fig.width=7, warning=FALSE}
+max(tally)
+
 barplot(tally, las=2, ylim=c(0,50), 
-        main="selective serotonin reuptake inhibitors and autism")
+        main="selective serotonin reuptake inhibitors\
+        & autism and brain")
+```
+
+```{r, echo=FALSE}
+
+search_topic <- 'Metabolism of diazepam and selective serotonin re-uptake inhibitors in the brain'
+search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
+```
+## Search term: "Metabolism of diazepam and selective serotonin re-uptake inhibitors in the brain"
+```{r diazepam, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+summary(search_query)
+```
+```{r, echo=FALSE, warning=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('Metabolism of diazepam and selective serotonin re-uptake inhibitors in the brain', type='esearch',db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+Maximum hits in a single year
+```{r, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,50), 
+        main="selective serotonin reuptake inhibitors\
+        & autism and brain")
+```
+
+
+```{r, echo=FALSE}
+search_topic <- 'Metabolism of diazepam and selective serotonin re-uptake inhibitors in the liver'
+search_query <- EUtilsSummary(search_topic)
+```
+
+### Search term: "Metabolism of diazepam and serotonin specific re-uptake inhibitors in the liver"
+```{r diazepam, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+summary(search_query)
+```
+
+```{r, echo=FALSE, warning=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('Metabolism of diazepam and selective serotonin re-uptake inhibitors in the liver', type='esearch',db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+Maximum hits in a single year
+```{r, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,50), 
+        main="Metabolism of diazepam and serotonin specific re-uptake\
+inhibitors in the liver")
+```
+
+
+Metabolism of diazepam in the brain
+
+```{r, echo=FALSE}
+search_topic <- 'Metabolism of diazepam in the brain'
+search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
+```
+
+#### Search term: "Metabolism of diazepam in the brain"
+```{r diazepam, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+summary(search_query)
+```
+
+```{r, echo=FALSE, warning=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('Metabolism of diazepam in the brain', type='esearch',db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+Maximum hits in a single year
+```{r, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,100), 
+        main="Metabolism of diazepam in the brain")
 ```
