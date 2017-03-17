@@ -1,0 +1,64 @@
+---
+title: "liver"
+author: "Subinoy"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE}
+
+library(RISmed)
+library(rmarkdown)
+
+```
+
+```{r, echo=FALSE, include=FALSE}
+search_topic <- 'diazepam and selective serotonin reuptake inhibitors and liver '
+s_name <- "7_diazepam_SSRI_liver"
+search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
+# get actual data from PubMed
+records<- EUtilsGet(search_query)
+# store it
+pubmed_data <- data.frame('PMID'=search_query@PMID, 'Title'=ArticleTitle(records),
+                          'Abstract'=AbstractText(records))
+pubmed_data$Abstract <- as.character(pubmed_data$Abstract)
+pubmed_data$Abstract <- gsub(",", " ", pubmed_data$Abstract, fixed = TRUE)
+write.csv(pubmed_data, file=paste(s_name, ".csv"))
+```
+
+# Search term used : "diazepam and selective serotonin reuptake inhibitors and liver"
+
+Article found
+```{r, echo=FALSE}
+search_query@count
+
+
+# summary(search_query)
+#QueryId(search_query)
+```
+```{r, echo=FALSE, warning=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('diazepam and selective serotonin reuptake inhibitors and liver', type='esearch',
+                       db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+
+Maximum hits in a single year
+```{r,echo=FALSE, fig.width=7, warning=FALSE}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,50), fig.width=7,
+        main="diazepam and selective serotonin reuptake\
+        inhibitors and liver")
+```

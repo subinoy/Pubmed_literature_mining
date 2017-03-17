@@ -8,7 +8,6 @@ Metabolism of diazepam and selective serotonin re-uptake inhibitors in the liver
 Metabolism of diazepam and serotonin specific re-uptake inhibitors in the liver
 
 
-8. Metabolism of diazepam in the brain
 
 9. Diazepam and selective serotonin re-uptake inhibitors and autism
 
@@ -20,3 +19,9 @@ Metabolism of diazepam and serotonin specific re-uptake inhibitors in the liver
 3. Metabolism of diazepam and selective serotonin re-uptake inhibitors in the brain [included]
 
 4. Metabolism of diazepam in the brain	[included]
+
+5. Metabolism of diazepam and selective serotonin reuptake inhibitors	[included]	
+
+6. Metabolism of diazepam and selective serotonin reuptake inhibitors in the brain	[included]
+
+7. diazepam and selective serotonin reuptake inhibitors and liver [included]
