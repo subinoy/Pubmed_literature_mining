@@ -1,0 +1,40 @@
+---
+title: "t1"
+author: "Subinoy"
+date: Sys.Date()
+output: pdf_document
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r, echo=FALSE}
+
+library(RISmed)
+library(rmarkdown)
+search_topic <- 'selective serotonin reuptake inhibitors and autism'
+s_name <- "SSRI_and_autism"
+search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
+# get actual data from PubMed
+records<- EUtilsGet(search_query)
+# store it
+pubmed_data <- data.frame('PMID'=search_query@PMID, 'Title'=ArticleTitle(records),
+                          'Abstract'=AbstractText(records))
+pubmed_data$Abstract <- as.character(pubmed_data$Abstract)
+pubmed_data$Abstract <- gsub(",", " ", pubmed_data$Abstract, fixed = TRUE)
+write.csv(pubmed_data, file=paste(s_name, ".csv"))
+```
+
+# Search term used : "selective serotonin reuptake inhibitors and autism"
+```{r, echo=FALSE}
+search_query@count
+
+
+# summary(search_query)
+#QueryId(search_query)
+```
