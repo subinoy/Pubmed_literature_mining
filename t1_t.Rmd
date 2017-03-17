@@ -1,8 +1,8 @@
 ---
 title: "t1"
 author: "Subinoy"
-date: Sys.Date()
-output: pdf_document
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output: word_document
 ---
 
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, include=FALSE}
 
 library(RISmed)
 library(rmarkdown)
@@ -27,14 +27,159 @@ pubmed_data <- data.frame('PMID'=search_query@PMID, 'Title'=ArticleTitle(records
                           'Abstract'=AbstractText(records))
 pubmed_data$Abstract <- as.character(pubmed_data$Abstract)
 pubmed_data$Abstract <- gsub(",", " ", pubmed_data$Abstract, fixed = TRUE)
-write.csv(pubmed_data, file=paste(s_name, ".csv"))
+# write.csv(pubmed_data, file=paste(s_name, ".csv"))
 ```
 
 # Search term used : "selective serotonin reuptake inhibitors and autism"
-```{r, echo=FALSE}
+
+Article found
+```{r, echo=FALSE, include=FALSE}
 search_query@count
 
 
 # summary(search_query)
 #QueryId(search_query)
+```
+```{r, echo=FALSE, warning=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('selective serotonin reuptake inhibitors and autism', type='esearch',
+                       db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+
+Maximum hits in a single year
+```{r,echo=FALSE, fig.width=7, warning=FALSE, include=FALSE}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,50), fig.width=7,
+        main="selective serotonin reuptake inhibitors & autism")
+```
+
+
+```{r, echo=FALSE, include=FALSE}
+
+search_topic <- 'selective serotonin reuptake inhibitors and autism and brain'
+s_name <- "2_SSRI_and_autism_brain"
+search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
+# get actual data from PubMed
+records<- EUtilsGet(search_query)
+# store it
+pubmed_data <- data.frame('PMID'=search_query@PMID, 'Title'=ArticleTitle(records),
+                          'Abstract'=AbstractText(records))
+pubmed_data$Abstract <- as.character(pubmed_data$Abstract)
+pubmed_data$Abstract <- gsub(",", " ", pubmed_data$Abstract, fixed = TRUE)
+write.csv(pubmed_data, file=paste(s_name, ".csv"))
+``` 
+## Search term used : "selective serotonin reuptake inhibitors and autism and brain" 
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('selective serotonin reuptake inhibitors and autism and brain', type='esearch',
+                       db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+
+Maximum hits in a single year
+```{r,echo=FALSE, warning=FALSE, include=FALSE}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,50), fig.width=7,
+        main="selective serotonin reuptake inhibitors and autism and brain")
+
+# end of 2nd
+```
+
+```{r, echo=FALSE, include=FALSE}
+search_topic <- 'Metabolism of diazepam and selective serotonin re-uptake inhibitors in the brain'
+s_name <- "3_Diazepam_SSRI_and_autism_brain"
+search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
+# get actual data from PubMed
+records<- EUtilsGet(search_query)
+# store it
+pubmed_data <- data.frame('PMID'=search_query@PMID, 'Title'=ArticleTitle(records),
+                          'Abstract'=AbstractText(records))
+pubmed_data$Abstract <- as.character(pubmed_data$Abstract)
+pubmed_data$Abstract <- gsub(",", " ", pubmed_data$Abstract, fixed = TRUE)
+write.csv(pubmed_data, file=paste(s_name, ".csv"))
+
+```
+### Search term: "Metabolism of diazepam and selective serotonin re-uptake inhibitors in the brain"
+
+Article found
+```{r , echo=FALSE, fig.width=7, message=FALSE, warning=FALSE, include=FALSE}
+search_query@count
+```
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('Metabolism of diazepam and selective serotonin re-uptake inhibitors in the brain', type='esearch',db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+Maximum hits in a single year
+```{r, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE, include=FALSE}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,50), 
+        main="Metabolism of diazepam and selective serotonin re-uptake\ inhibitors in the brain")
+# end of 3rd
+```
+
+```{r,  echo=FALSE, message=FALSE, warning=FALSE}
+search_topic <- ' Metabolism of diazepam in the brain'
+s_name <- "4_diazepm_brain"
+search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
+# get actual data from PubMed
+records<- EUtilsGet(search_query)
+# store it
+pubmed_data <- data.frame('PMID'=search_query@PMID, 'Title'=ArticleTitle(records),
+                          'Abstract'=AbstractText(records))
+pubmed_data$Abstract <- as.character(pubmed_data$Abstract)
+pubmed_data$Abstract <- gsub(",", " ", pubmed_data$Abstract, fixed = TRUE)
+# write.csv(pubmed_data, file=paste(s_name, ".csv"))
+```
+
+#### Search term: "Metabolism of diazepam in the brain"
+
+Article found
+```{r , echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+search_query@count
+```
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+tally <- array()
+x <- 1
+for (i in 2000:2017){
+    Sys.sleep(1)
+    r <- EUtilsSummary('Metabolism of diazepam in the brain', type='esearch',db='pubmed', mindate=i, maxdate=i)
+    tally[x] <- QueryCount(r)
+    x <- x + 1
+}
+
+names(tally) <- 2000:2017
+```
+Maximum hits in a single year
+```{r, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE,}
+max(tally)
+
+barplot(tally, las=2, ylim=c(0,100), 
+        main="Metabolism of diazepam in the brain")
+# end of 4th
 ```

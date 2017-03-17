@@ -77,7 +77,7 @@ search_topic <- 'Metabolism of diazepam and selective serotonin re-uptake inhibi
 search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2017)
 ```
 ## Search term: "Metabolism of diazepam and selective serotonin re-uptake inhibitors in the brain"
-```{r diazepam, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+```{r diazepam0, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
 summary(search_query)
 ```
 ```{r, echo=FALSE, warning=FALSE}
@@ -108,7 +108,7 @@ search_query <- EUtilsSummary(search_topic)
 ```
 
 ### Search term: "Metabolism of diazepam and serotonin specific re-uptake inhibitors in the liver"
-```{r diazepam, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+```{r diazepam1, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
 summary(search_query)
 ```
 
@@ -142,7 +142,7 @@ search_query <- EUtilsSummary(search_topic, retmax=10000, mindate=2000,maxdate=2
 ```
 
 #### Search term: "Metabolism of diazepam in the brain"
-```{r diazepam, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
+```{r diazepam2, echo=FALSE, fig.width=7, message=FALSE, warning=FALSE}
 summary(search_query)
 ```
 
